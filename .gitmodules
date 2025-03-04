@@ -1,3 +1,0 @@
-[submodule "src/components/headless"]
-	path = src/headless
-	url = https://github.com/doggopawer/headless.git
