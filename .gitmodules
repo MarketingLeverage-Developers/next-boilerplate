@@ -1,3 +1,6 @@
 [submodule "src/headless"]
 	path = src/headless
 	url = https://github.com/doggopawer/headless.git
+[submodule "src/wireframe"]
+	path = src/wireframe
+	url = https://github.com/MarketingLeverage-Developers/wireframe
