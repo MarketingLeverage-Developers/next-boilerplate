@@ -4,3 +4,6 @@
 [submodule "src/wireframe"]
 	path = src/wireframe
 	url = https://github.com/MarketingLeverage-Developers/wireframe
+[submodule "src/ui-kit"]
+	path = src/ui-kit
+	url = https://github.com/MarketingLeverage-Developers/ui-kit.git
