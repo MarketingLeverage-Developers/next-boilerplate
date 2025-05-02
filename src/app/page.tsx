@@ -1,3 +1,4 @@
+import HomeApiCaller from '@/components/HomeApiCaller';
 import Container from '@/wireframe/Container/Container';
 import Content from '@/wireframe/Content/Content';
 import DesktopContent from '@/wireframe/DesktopContent/DesktopContent';
@@ -5,6 +6,7 @@ import MobileContent from '@/wireframe/MobileContent/MobileContent';
 import Page from '@/wireframe/Page/Page';
 import Section from '@/wireframe/Section/Section';
 import Text from '@/wireframe/Text/Text';
+import { Suspense } from 'react';
 
 export default function Home() {
     return (
@@ -33,7 +35,12 @@ export default function Home() {
                     </Container>
                 </Section>
             </Page.Main>
-            <Page.Footer>푸터</Page.Footer>
+            <Page.Footer>
+                푸터
+                <Suspense fallback={<div></div>}>
+                    <HomeApiCaller />
+                </Suspense>
+            </Page.Footer>
         </Page>
     );
 }

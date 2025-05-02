@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import PageViewApiCaller from '@/components/PageViewApiCaller';
 
 const LocalFont = localFont({
     src: [
@@ -70,6 +71,7 @@ export default function RootLayout({
     return (
         <html lang="kr" suppressHydrationWarning>
             <body suppressHydrationWarning className={LocalFont.className}>
+                <PageViewApiCaller />
                 {children}
             </body>
         </html>
