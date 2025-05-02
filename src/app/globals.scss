@@ -1,8 +1,12 @@
+@import '@/ui-kit/_variable';
+
+:root {
+    --primary-color: #{$primary-color};
+}
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html,
 body,
 div,
@@ -82,6 +86,7 @@ section,
 summary,
 time,
 mark,
+button,
 audio,
 video {
     margin: 0;
@@ -90,6 +95,7 @@ video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: var(--font-pretendard);
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -107,7 +113,7 @@ section {
 }
 body {
     line-height: 1;
-    /* font-family: var(--font-pretendard); */
+    font-family: var(--font-pretendard);
 }
 ol,
 ul {
