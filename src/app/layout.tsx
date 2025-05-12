@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
-import PageViewApiCaller from '@/components/PageViewApiCaller';
+import './globals.scss';
+import { ThemeProvider } from '@/ui-kit/src/components/ThemeProvider';
 
 const LocalFont = localFont({
     src: [
@@ -55,8 +55,8 @@ const LocalFont = localFont({
 });
 
 export const metadata: Metadata = {
-    title: '더브릿지랩',
-    description: '더브릿지랩',
+    title: '보일러플레이트',
+    description: '보일러플레이트',
     keywords: [],
     icons: {
         icon: '/favicon.ico', // public 폴더에 있는 favicon.ico 파일을 사용
@@ -69,10 +69,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="kr" suppressHydrationWarning>
+        <html lang="kr" suppressHydrationWarning id="root">
             <body suppressHydrationWarning className={LocalFont.className}>
-                <PageViewApiCaller />
-                {children}
+                <ThemeProvider
+                    theme={{
+                        '--primary-color': '#417EF0',
+                        '--text-color': '#111',
+                    }}
+                >
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );
