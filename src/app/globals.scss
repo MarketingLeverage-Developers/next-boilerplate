@@ -1,6 +1,4 @@
-// @import '@/ui-kit/_variable';
-
-$primary-color: #215295;
+@import '@/ui-kit/_variable';
 
 :root {
     --primary-color: #{$primary-color};

@@ -55,8 +55,8 @@ const LocalFont = localFont({
 });
 
 export const metadata: Metadata = {
-    title: '한빛하우징 - H&B 하우징',
-    description: '한빛하우징 - H&B 하우징',
+    title: '더브릿지랩',
+    description: '더브릿지랩',
     keywords: [],
     icons: {
         icon: '/favicon.ico', // public 폴더에 있는 favicon.ico 파일을 사용
