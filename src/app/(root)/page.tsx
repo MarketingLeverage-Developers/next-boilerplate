@@ -3,6 +3,7 @@ import { getSpecialCarList } from '@/services/car';
 import { getEventList } from '@/services/event';
 import { getReviewList } from '@/services/reviews';
 import ButtonA from '@/ui-kit/src/components/contents/Button/A/ButtonA';
+import SwiperA from '@/ui-kit/src/components/contents/Swiper/A/SwiperA';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +23,7 @@ export default async function Root({}: // searchParams,
         <div>
             홈
             <ButtonA />
+            <SwiperA>dd</SwiperA>
         </div>
     );
 }
