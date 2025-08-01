@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { callPageView } from '@/services';
+import { getOrCreateVisitorId } from '@/services/visitor';
 
 type ApiData = any; // 실제 데이터 타입에 맞게 수정하세요.
 
@@ -10,11 +11,11 @@ interface ApiCallerProps {}
 export default function CallPageView({}: ApiCallerProps) {
     const searchParams = useSearchParams();
     const paramsObj: Record<string, string> = Object.fromEntries(searchParams.entries());
-
+    const visitorId = getOrCreateVisitorId();
     useEffect(() => {
         (async () => {
             try {
-                await callPageView({});
+                await callPageView({ body: { visitorId } });
             } catch (e) {
                 console.log(e);
             }

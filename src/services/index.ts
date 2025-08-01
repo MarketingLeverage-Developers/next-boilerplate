@@ -5,11 +5,19 @@ export type CallHomeQuery = {
     [key: string]: string;
 };
 
-export const callHome = async ({ query }: Request<undefined, CallHomeQuery, undefined>): Promise<void> => {
+export interface CallHomeBody {
+    visitorId: string;
+    docReferer: string;
+}
+
+export const callHome = async ({ query, body }: Request<CallHomeBody, CallHomeQuery, undefined>): Promise<void> => {
     try {
-        await apiClient.get<void>(`/client/home`, { query });
+        await apiClient.post<void>('/client/home', {
+            query,
+            body,
+        });
     } catch (e) {
-        console.log(e);
+        console.error('callHome 실패', e);
     }
 };
 
@@ -17,9 +25,32 @@ export type CallPageViewQuery = {
     [key: string]: string;
 };
 
-export const callPageView = async ({}: Request<undefined, undefined, undefined>): Promise<void> => {
+export interface CallPageeBody {
+    visitorId: string;
+}
+
+export const callPageView = async ({ body }: Request<CallPageeBody, undefined, undefined>): Promise<void> => {
     try {
-        await apiClient.post<void>(`/client/pageView`, {});
+        await apiClient.post<void>(`/client/pageView`, {
+            body,
+        });
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export interface CallPageStayBody {
+    siteUrl: string;
+    entryTime: string;
+    exitTime: string;
+    visitorId: string;
+}
+
+type CallPageStayRequest = Request<CallPageStayBody>;
+
+export const callPageStay = async ({ body }: CallPageStayRequest) => {
+    try {
+        await apiClient.post<void>(`/client/pageStay`, { body: { ...body } });
     } catch (e) {
         console.log(e);
     }
