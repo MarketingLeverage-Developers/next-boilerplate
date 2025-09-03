@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { postInquiry } from '@/services/inquiry';
 
@@ -20,10 +20,6 @@ type ModalFormContextType = {
     setPrivacyValue: (val: boolean) => void;
     setOccupation: (val: string) => void;
     setPeriod: (val: string) => void;
-    canShowPhone: boolean;
-    canShowPrivacy: boolean;
-    active: boolean;
-
     handleButtonClick: () => Promise<void>;
 };
 
@@ -40,10 +36,6 @@ export const ModalFormProvider = ({ children }: { children: ReactNode }) => {
     const [middlePhone, setMiddlePhone] = useState('');
     const [lastPhone, setLastPhone] = useState('');
     const [privacyValue, setPrivacyValue] = useState(true);
-
-    const canShowPhone = carModel.length >= 2 && name.length >= 2;
-    const canShowPrivacy = carModel.length >= 2 && name.length >= 2 && middlePhone.length >= 4 && lastPhone.length >= 4;
-    const active = canShowPrivacy && privacyValue;
 
     const handleButtonClick = async () => {
         try {
@@ -84,9 +76,6 @@ export const ModalFormProvider = ({ children }: { children: ReactNode }) => {
                 setPrivacyValue,
                 setOccupation,
                 setPeriod,
-                canShowPhone,
-                canShowPrivacy,
-                active,
                 handleButtonClick,
             }}
         >
