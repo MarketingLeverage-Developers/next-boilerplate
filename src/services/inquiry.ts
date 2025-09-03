@@ -6,9 +6,10 @@ export interface PostInquiryBody {
     name: string;
     firstPhone: string;
     middlePhone: string;
+    occupation?: string;
+    period?: string;
     lastPhone: string;
     carModel: string;
-    carRentType: string;
     inquireLocation: string;
 }
 
