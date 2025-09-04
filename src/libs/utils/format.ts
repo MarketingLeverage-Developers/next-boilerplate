@@ -38,5 +38,3 @@ export const formatToManUnit = (value: number | null | undefined): string => {
     const formatted = man.toLocaleString('ko-KR');
     return `${formatted}`;
 };
-
-// 사용 예
