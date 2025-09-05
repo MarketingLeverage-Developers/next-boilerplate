@@ -55,7 +55,10 @@ export const FormProvider = ({ children, inquireLocation = '메인-상단' }: Fo
 
     // 공통 업데이트 함수
     const updateForm = (key: keyof FormState, value: string | boolean) => {
-        setForm((prev) => ({ ...prev, [key]: value }));
+        setForm((prev) => ({
+            ...prev,
+            [key]: typeof value === 'string' ? validateText(value) : value, // ✅ 문자열은 무조건 validateText 적용
+        }));
     };
 
     const handleButtonClick = useCallback(async () => {
