@@ -14,7 +14,7 @@ const CompletePage = () => {
         if (sessionStorage.getItem(`conv_${token}`) === 'done') return;
 
         alert('문의가 완료되었습니다!');
-
+        setTimeout(() => router.push('/'), 500);
         // 전환 스크립트 추가
         // const fireLead = () => {
         //     window.karrotPixel?.track('Lead');

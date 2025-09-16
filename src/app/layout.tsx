@@ -75,6 +75,7 @@ export default function RootLayout({
                     theme={{
                         '--primary-color': '#417EF0',
                         '--text-color': '#111',
+                        '--focus-color': '#417EF0',
                     }}
                 >
                     {children}
