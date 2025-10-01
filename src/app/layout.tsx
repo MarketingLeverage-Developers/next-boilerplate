@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.scss';
 import { ThemeProvider } from '@/ui-kit/src/components/ThemeProvider';
+import ClientLayout from './ClientLayout';
 
 const LocalFont = localFont({
     src: [
@@ -78,7 +79,7 @@ export default function RootLayout({
                         '--focus-color': '#417EF0',
                     }}
                 >
-                    {children}
+                    <ClientLayout>{children}</ClientLayout>
                 </ThemeProvider>
             </body>
         </html>
