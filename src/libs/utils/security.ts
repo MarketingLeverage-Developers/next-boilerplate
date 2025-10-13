@@ -9,7 +9,7 @@ export const useSafeInput = () => {
 
     const normalizePhone = (input: string) => input.replace(/[^0-9]/g, '');
     const validateText = (input: string) =>
-        input.replace(/[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9\u1100-\u1112\u318D\u119E\u11A2\u2022\u2025\u00B7\uFE55\s]/g, '');
+        input.replace(/[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9\u1100-\u1112\u318D\u119E\u11A2\u2022\u2025\u00B7\uFE55\s\.,]/g, '');
 
     return { sanitize, normalizePhone, validateText };
 };
