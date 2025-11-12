@@ -20,7 +20,6 @@ export default function ClientGuard({ children }: Props) {
                 // 통과
                 setStatus('allowed');
             } catch (e) {
-                console.log('blockIp error:', e);
                 // 차단
                 setStatus('blocked');
 
