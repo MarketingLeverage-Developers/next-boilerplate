@@ -16,27 +16,37 @@ export default function ClientGuard({ children }: Props) {
     useEffect(() => {
         (async () => {
             try {
+                // IP 차단 여부 체크 API
                 await blockIp();
-                // 통과
-                setStatus('allowed');
-            } catch (e) {
-                // 차단
-                setStatus('blocked');
 
-                // URL도 /403 으로 보이게 하고 싶으면:
-                if (window.location.pathname !== '/403') {
-                    window.history.replaceState(null, '', '/403');
+                // 정상 응답 → 통과
+                setStatus('allowed');
+            } catch (err: any) {
+                const statusCode = err?.response?.status;
+
+                if (statusCode === 403) {
+                    // 403일 때만 차단
+                    setStatus('blocked');
+
+                    // URL을 /403으로 바꾸고 싶다면 아래처럼 사용:
+                    // if (window.location.pathname !== '/403') {
+                    //   window.history.replaceState(null, '', '/403');
+                    // }
+                } else {
+                    // 404, 500, 네트워크 에러 등 → 모두 통과
+                    console.error('blockIp error but not 403:', err);
+                    setStatus('allowed');
                 }
             }
         })();
     }, []);
 
-    // 아직 결과 안 나왔으면 아무것도 렌더 안 함 (원하면 로딩 스피너 등으로 교체 가능)
+    // 아직 결과 안 나왔으면 아무것도 렌더 안 함 (로딩 UI 가능)
     if (status === 'pending') return null;
 
-    // 차단이면 완전 새하얀 화면
+    // 403 차단이면 새하얀 화면
     if (status === 'blocked') return null;
 
-    // 통과했을 때만 실제 레이아웃/페이지 렌더
+    // 통과했을 때만 실제 페이지 렌더
     return <>{children}</>;
 }
