@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { postInquiry } from '@/services/inquiry';
 import { useSafeInput } from '@/libs/utils/security';
 import { generateToken } from '@/libs/utils/token';
+import { createInquiry } from '@/libs/utils/createInquiry';
 
 // 📌 form 상태 타입
 type FormState = {
@@ -66,6 +67,31 @@ export const FormProvider = ({ children, inquireLocation = '메인-상단' }: Fo
         setIsSubmitting(true);
 
         try {
+            // ✅ 필수 항목 검증
+            if (!form.name.trim()) {
+                alert('이름을 입력해 주세요.');
+                setIsSubmitting(false);
+                return;
+            }
+
+            if (!form.carModel.trim()) {
+                alert('차량명을 입력해 주세요.');
+                setIsSubmitting(false);
+                return;
+            }
+
+            if (!form.middlePhone.trim() || !form.lastPhone.trim()) {
+                alert('전화번호를 모두 입력해 주세요.');
+                setIsSubmitting(false);
+                return;
+            }
+
+            if (!form.privacyValue) {
+                alert('개인정보 수집 및 이용에 동의해 주세요.');
+                setIsSubmitting(false);
+                return;
+            }
+
             const safeData = {
                 name: sanitize(validateText(form.name.trim())),
                 carModel: sanitize(validateText(form.carModel.trim())),
@@ -77,9 +103,10 @@ export const FormProvider = ({ children, inquireLocation = '메인-상단' }: Fo
                 inquireLocation,
             };
 
-            await postInquiry({ body: safeData });
-
-            router.push(`/complete?token=${token}`);
+            const isProd = process.env.NEXT_PUBLIC_ENV === 'prod';
+            await createInquiry(safeData);
+            isProd && router.push(`/complete?token=${token}`);
+            !isProd && alert('상담 신청에 성공했습니다.');
         } catch (error: any) {
             alert(error.response?.data?.result?.message ?? '상담 신청에 실패했습니다!');
         } finally {
